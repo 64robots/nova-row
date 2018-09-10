@@ -1,5 +1,11 @@
 <template>
-  <default-field :field="field">
+  <r64-default-field
+    :field="field"
+    :hide-label="field.hideLabelInForms"
+    :field-classes="field.fieldClasses"
+    :wrapper-classes="field.wrapperClasses"
+    :label-classes="field.labelClasses"
+  >
     <template slot="field">
       <div class="row-container">
         <div
@@ -19,6 +25,7 @@
           :key="`${row.row_id}${index}`"
           v-for="(field, index) in fields"
           v-model="row[field.attribute]"
+          :updated-value="row[field.attribute]"
           :is="`form-${field.component}`"
           :resource-name="resourceName"
           :resource-id="resourceId"
@@ -36,7 +43,7 @@
         >Add Row</a>
       </div>
     </template>
-  </default-field>
+  </r64-default-field>
 </template>
 
 <script>
@@ -64,9 +71,19 @@ export default {
           return copy;
         });
         this.$emit('input', this.value);
-        console.log(this.value);
+        console.log(values);
       }
     }
+  },
+
+  created() {
+    if (!this.field.value) return;
+
+    const values = this.field.value || [];
+
+    values.forEach(value => this.addItemToRow(value));
+
+    // a cada field hay que meterle su respectivo value
   },
 
   methods: {
@@ -76,6 +93,10 @@ export default {
         return result;
       }, {});
 
+      this.addItemToRow(obj);
+    },
+
+    addItemToRow(obj) {
       Object.assign(obj, {
         row_id: Math.random()
           .toString(36)

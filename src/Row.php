@@ -3,9 +3,11 @@
 namespace R64\NovaRow;
 
 use Laravel\Nova\Fields\Field;
+use R64\NovaFields\Configurable;
 
 class Row extends Field
 {
+    use Configurable;
     /**
      * The field's component.
      *
