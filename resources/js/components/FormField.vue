@@ -22,10 +22,10 @@
       >
         <component
           class="remove-bottom-border w-full"
-          :key="`${row.row_id}${index}`"
-          v-for="(field, index) in fields"
+          :key="`${row.row_id}${field.attribute}`"
+          :ref="`${row.row_id}${field.attribute}`"
+          v-for="field in fields"
           v-model="row[field.attribute]"
-          :updated-value="row[field.attribute]"
           :is="`form-${field.component}`"
           :resource-name="resourceName"
           :resource-id="resourceId"
@@ -71,7 +71,6 @@ export default {
           return copy;
         });
         this.$emit('input', this.value);
-        console.log(values);
       }
     }
   },
@@ -82,8 +81,16 @@ export default {
     const values = this.field.value || [];
 
     values.forEach(value => this.addItemToRow(value));
+  },
 
-    // a cada field hay que meterle su respectivo value
+  mounted() {
+    this.values.forEach(value => {
+      Object.keys(value).forEach(key => {
+        if (key !== 'row_id') {
+          this.$refs[`${value.row_id}${key}`][0].handleChange(value[key]);
+        }
+      });
+    });
   },
 
   methods: {
