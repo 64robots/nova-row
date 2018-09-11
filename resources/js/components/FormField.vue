@@ -7,18 +7,11 @@
     :label-classes="field.labelClasses"
   >
     <template slot="field">
-      <div class="row-container">
-        <div
-          v-for="(field, index) in fields"
-          :key="index"
-          class="border-40 border"
-          :class="field.fieldClasses"
-        >{{ field.name }}</div>
-      </div>
+      <RowHeading :fields="fields" />
       <div
         v-for="row in values"
         :key="row.row_id"
-        class="row-container border-40 border relative"
+        class="flex border-40 border relative"
       >
         <component
           class="remove-bottom-border w-full"
@@ -33,30 +26,44 @@
         />
         <span
           class="flex items-center justify-center bg-danger text-white p-2 m-2 w-6 h-6 rounded-full cursor-pointer font-bold"
-          @click="deleteRow(row.row_id)"
+          @click="rowToRemove = row.row_id"
         >x</span>
       </div>
       <div class="flex justify-end">
         <a
           class="btn btn-primary p-3 rounded cursor-pointer mt-3"
           @click="addRow"
-        >Add Row</a>
+        >{{ __('Add Row') }}</a>
       </div>
+      <portal to="modals">
+        <transition name="fade">
+          <RowDeleteModal
+            v-if="rowToRemove"
+            @confirm="removeRow"
+            @close="rowToRemove = null"
+          />
+        </transition>
+      </portal>
     </template>
   </r64-default-field>
 </template>
 
 <script>
 import { FormField, HandlesValidationErrors } from 'laravel-nova';
+import RowField from './RowField';
+import RowHeading from './RowHeading';
+import RowDeleteModal from './RowDeleteModal';
 
 export default {
-  mixins: [FormField, HandlesValidationErrors],
+  mixins: [FormField, HandlesValidationErrors, RowField],
+
+  components: { RowHeading, RowDeleteModal },
 
   props: ['resourceName', 'resourceId', 'field'],
 
   data() {
     return {
-      values: [],
+      rowToRemove: null,
       fields: this.field.fields
     };
   },
@@ -73,14 +80,6 @@ export default {
         this.$emit('input', this.value);
       }
     }
-  },
-
-  created() {
-    if (!this.field.value) return;
-
-    const values = this.field.value || [];
-
-    values.forEach(value => this.addItemToRow(value));
   },
 
   mounted() {
@@ -103,18 +102,12 @@ export default {
       this.addItemToRow(obj);
     },
 
-    addItemToRow(obj) {
-      Object.assign(obj, {
-        row_id: Math.random()
-          .toString(36)
-          .substr(2, 9)
-      });
-      this.$set(this.values, this.values.length, obj);
-    },
-
-    deleteRow(id) {
-      const index = this.values.findIndex(row => row.row_id === id);
+    removeRow() {
+      const index = this.values.findIndex(
+        row => row.row_id === this.rowToRemove
+      );
       this.values.splice(index, 1);
+      this.rowToRemove = null;
     },
 
     /*
@@ -140,8 +133,3 @@ export default {
   }
 };
 </script>
-<style scoped>
-.row-container {
-  display: flex;
-}
-</style>
