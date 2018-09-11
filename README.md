@@ -15,7 +15,7 @@ Run this command in your nova project:
 
 Create a new Row field passing an array of Nova Fields as a second param. Attribute name can be passed as third param.
 
-As we are using ![R64 Nova Fields](https://github.com/64robots/nova-fields). We can customize the classes and hide the field labels.
+As we are using [R64 Nova Fields](https://github.com/64robots/nova-fields). We can customize the classes and hide the field labels.
 
 ```php
 use R64\NovaRow\Row;
