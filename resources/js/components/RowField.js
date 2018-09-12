@@ -8,7 +8,11 @@ export default {
   created() {
     if (!this.field.value) return;
 
-    const values = this.field.value || [];
+    let values = this.field.value || [];
+
+    if (typeof this.field.value === 'string') {
+      values = JSON.parse(this.field.value);
+    }
 
     values.forEach(value => this.addItemToRow(value));
   },

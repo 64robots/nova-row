@@ -8,7 +8,7 @@
   "license": "MIT",
   "require": {
     "php": ">=7.1.0",
-    "64robots/nova-fields": "^0.1.6"
+    "64robots/nova-fields": "^0.1.8"
   },
   "autoload": {
     "psr-4": {

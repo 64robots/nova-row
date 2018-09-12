@@ -72,12 +72,13 @@ export default {
     values: {
       deep: true,
       handler(values) {
-        this.value = values.map(value => {
+        const value = values.map(value => {
           const copy = Object.assign({}, value);
           delete copy.row_id;
           return copy;
         });
-        this.$emit('input', this.value);
+        this.value = JSON.stringify(value);
+        this.$emit('input', value);
       }
     }
   },
