@@ -8,14 +8,14 @@ This field allows you to create horizontal rows passing a collection of [Custom 
 
 ### Install
 
-Run this command into your nova project:
+Run this command in your nova project:
 `composer require 64robots/nova-row`
 
 ### Add it to your Nova Resource:
 
-Create a new Row field passing an array of Nova Fields as second param. Attribute name can be passed as third param.
+Create a new Row field passing an array of Nova Fields as a second param. Attribute name can be passed as third param.
 
-As we are using R64 Nova Fields. We can customize the classes and hide the field labels.
+As we are using [R64 Nova Fields](https://github.com/64robots/nova-fields). We can customize the classes and hide the field labels.
 
 ```php
 use R64\NovaRow\Row;
