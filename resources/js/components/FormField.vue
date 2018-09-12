@@ -11,7 +11,7 @@
       <div
         v-for="row in values"
         :key="row.row_id"
-        class="flex border-40 border relative"
+        class="flex items-center border-40 border relative"
       >
         <component
           class="remove-bottom-border w-full"
