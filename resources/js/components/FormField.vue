@@ -87,7 +87,8 @@ export default {
     this.values.forEach(value => {
       Object.keys(value).forEach(key => {
         if (key !== 'row_id') {
-          this.$refs[`${value.row_id}${key}`][0].handleChange(value[key]);
+          const element = this.$refs[`${value.row_id}${key}`][0];
+          element.handleChange(value[key]);
         }
       });
     });
