@@ -11,7 +11,10 @@
       :hide-label="field.hideContentLabel"
     >
       <template slot="content">
-        <RowHeading :fields="field.fields" />
+        <RowHeading
+          v-if="!field.hideHeading"
+          :fields="field.fields"
+        />
         <div
           v-for="row in values"
           :key="row.row_id"

@@ -7,7 +7,10 @@
     :label-classes="field.labelClasses"
   >
     <template slot="field">
-      <RowHeading :fields="fields" />
+      <RowHeading
+        v-if="!field.hideHeading"
+        :fields="fields"
+      />
       <div
         v-for="row in values"
         :key="row.row_id"
@@ -86,10 +89,11 @@ export default {
   mounted() {
     this.values.forEach(value => {
       Object.keys(value).forEach(key => {
-        if (key !== 'row_id') {
-          const element = this.$refs[`${value.row_id}${key}`][0];
-          element.handleChange(value[key]);
-        }
+        const ref = this.$refs[`${value.row_id}${key}`];
+        if (!ref) return;
+
+        const element = ref[0];
+        element.handleChange(value[key]);
       });
     });
   },

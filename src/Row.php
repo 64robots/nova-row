@@ -43,4 +43,14 @@ class Row extends Field
 
         $this->withMeta(['fields' => $fields]);
     }
+
+    /**
+     * Indicate that the heading should be hidden.
+     *
+     * @return $this
+     */
+    public function hideHeading()
+    {
+        return $this->withMeta(['hideHeading' => true]);
+    }
 }
