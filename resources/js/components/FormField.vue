@@ -36,7 +36,7 @@
         <a
           class="btn btn-primary p-3 rounded cursor-pointer mt-3"
           @click="addRow"
-        >{{ __('Add Row') }}</a>
+        >{{ addRowText }}</a>
       </div>
       <portal to="modals">
         <transition name="fade">
@@ -83,6 +83,12 @@ export default {
         this.value = JSON.stringify(value);
         this.$emit('input', value);
       }
+    }
+  },
+
+  computed: {
+    addRowText() {
+      return this.field.addRowText || this.__('Add Row');
     }
   },
 

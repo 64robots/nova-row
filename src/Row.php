@@ -53,4 +53,14 @@ class Row extends Field
     {
         return $this->withMeta(['hideHeading' => true]);
     }
+
+    /**
+     * Set text for Add Row button.
+     * @param  string  $name
+     * @return $this
+     */
+    public function addRowText($text)
+    {
+        return $this->withMeta(['addRowText' => $text]);
+    }
 }
