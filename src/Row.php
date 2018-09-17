@@ -2,12 +2,13 @@
 
 namespace R64\NovaRow;
 
+use R64\NovaFields\HasChilds;
 use Laravel\Nova\Fields\Field;
 use R64\NovaFields\Configurable;
 
 class Row extends Field
 {
-    use Configurable;
+    use Configurable, HasChilds;
     /**
      * The field's component.
      *

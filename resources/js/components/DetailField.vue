@@ -1,14 +1,16 @@
 <template>
   <r64-panel-item
     :field="field"
-    :hide-label="field.hideLabelInDetail"
+    :hide-label="hideLabelInDetail"
+    :label-classes="panelLabelClasses"
+    :field-classes="panelFieldClasses"
   >
     <r64-excerpt
       slot="value"
       :content="field.value"
-      :excerpt-classes="field.excerptClasses"
-      :show-label="field.showContentLabel"
-      :hide-label="field.hideContentLabel"
+      :excerpt-classes="excerptClasses"
+      :show-label="showContentLabel"
+      :hide-label="hideContentLabel"
     >
       <template slot="content">
         <RowHeading
@@ -32,11 +34,12 @@
 </template>
 
 <script>
+import R64Field from './R64Field';
 import RowHeading from './RowHeading';
 import RowField from './RowField';
 
 export default {
-  mixins: [RowField],
+  mixins: [RowField, R64Field],
 
   components: { RowHeading },
 

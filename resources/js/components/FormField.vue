@@ -1,15 +1,16 @@
 <template>
   <r64-default-field
     :field="field"
-    :hide-label="field.hideLabelInForms"
-    :field-classes="field.fieldClasses"
-    :wrapper-classes="field.wrapperClasses"
-    :label-classes="field.labelClasses"
+    :hide-label="hideLabelInForms"
+    :field-classes="fieldClasses"
+    :wrapper-classes="wrapperClasses"
+    :label-classes="labelClasses"
   >
     <template slot="field">
       <RowHeading
         v-if="!field.hideHeading"
         :fields="fields"
+        :base-classes="field.childConfig"
       />
       <div
         v-for="row in values"
@@ -18,14 +19,15 @@
       >
         <component
           class="remove-bottom-border w-full"
-          :key="`${row.row_id}${field.attribute}`"
-          :ref="`${row.row_id}${field.attribute}`"
-          v-for="field in fields"
-          v-model="row[field.attribute]"
-          :is="`form-${field.component}`"
+          :key="`${row.row_id}${f.attribute}`"
+          :ref="`${row.row_id}${f.attribute}`"
+          v-for="f in fields"
+          v-model="row[f.attribute]"
+          :is="`form-${f.component}`"
           :resource-name="resourceName"
           :resource-id="resourceId"
-          :field="field"
+          :field="f"
+          :base-classes="field.childConfig"
         />
         <span
           class="flex items-center justify-center bg-danger text-white p-2 m-2 w-6 h-6 rounded-full cursor-pointer font-bold"
@@ -54,11 +56,12 @@
 <script>
 import { FormField, HandlesValidationErrors } from 'laravel-nova';
 import RowField from './RowField';
+import R64Field from './R64Field';
 import RowHeading from './RowHeading';
 import RowDeleteModal from './RowDeleteModal';
 
 export default {
-  mixins: [FormField, HandlesValidationErrors, RowField],
+  mixins: [FormField, HandlesValidationErrors, RowField, R64Field],
 
   components: { RowHeading, RowDeleteModal },
 
