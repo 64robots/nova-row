@@ -28,6 +28,7 @@
           :resource-id="resourceId"
           :field="f"
           :base-classes="field.childConfig"
+          :errors="errors"
         />
         <span
           class="flex items-center justify-center bg-danger text-white p-2 m-2 w-6 h-6 rounded-full cursor-pointer font-bold"
