@@ -16,6 +16,7 @@
         <RowHeading
           v-if="!field.hideHeading"
           :fields="field.fields"
+          :base-classes="field.childConfig"
         />
         <div
           v-for="row in values"
