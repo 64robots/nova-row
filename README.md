@@ -1,3 +1,7 @@
+# Important
+
+This field has been merged to [Custom Nova Fields](https://github.com/64robots/nova-fields) package. Keep track of it for updates!
+
 # Row Field for Laravel Nova
 
 This field allows you to create horizontal rows passing a collection of [Custom Nova Fields](https://github.com/64robots/nova-fields).
@@ -9,7 +13,7 @@ This field allows you to create horizontal rows passing a collection of [Custom 
 ### Install
 
 Run this command in your nova project:
-`composer require 64robots/nova-row`
+`composer require 64robots/nova-fields`
 
 ### Add it to your Nova Resource:
 
@@ -18,7 +22,7 @@ Create a new Row field passing an array of Nova Fields as a second param. Attrib
 As we are using [R64 Nova Fields](https://github.com/64robots/nova-fields). We can customize the classes and hide the field labels.
 
 ```php
-use R64\NovaRow\Row;
+use R64\NovaFields\Row;
 
 Row::make('Lines', [
       Number::make('Quantity')
