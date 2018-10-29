@@ -1,6 +1,6 @@
 # Important
 
-This field has been merged to [Custom Nova Fields](https://github.com/64robots/nova-fields) package. Keep track of it for updates!
+# This field has been merged to [Custom Nova Fields](https://github.com/64robots/nova-fields) package. Keep track of it for updates!
 
 # Row Field for Laravel Nova
 
